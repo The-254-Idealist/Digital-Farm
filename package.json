@@ -1,12 +1,13 @@
 {
-  "name": "trial-001",
+  "name": "digital-farm",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js"
-  },
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend"
+  }, 
   "author": "Mega",
   "license": "MIT",
   "dependencies": {

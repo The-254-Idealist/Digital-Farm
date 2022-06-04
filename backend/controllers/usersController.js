@@ -1,4 +1,4 @@
-// const jwt = requre('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const bcrypt = require ('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
@@ -35,7 +35,7 @@ const registerUser = asyncHandler(async( req, res) => {
                 _id: user.id,
                 name: user.name,
                 email: user.email,
-
+                token: generateToken(user._id)
             })
         }
 
@@ -43,7 +43,7 @@ const registerUser = asyncHandler(async( req, res) => {
     }
 
 )
-//user dettails and login
+//user details and login
 
 const loginUser = asyncHandler(async ( req, res) =>{
          const {email , password} = req.body
@@ -55,6 +55,7 @@ const loginUser = asyncHandler(async ( req, res) =>{
                 _id: user.id,
                 name: user.name,
                 email: user.email,
+                token: generateToken(user._id),
 
         })
 
@@ -67,10 +68,22 @@ const loginUser = asyncHandler(async ( req, res) =>{
 })
 
 const getme = asyncHandler( async( req, res) =>{
-    res.json({message : 'User data'})
+ const {_id, name , email} = await User.findById(req.user.id)
+
+ res.status(200).json({
+     id:_id,
+     name,
+     email,
+ })
 }
 
 )
+
+const generateToken =  (id) =>{
+    return jwt.sign({id},process.env.JWT_SECRET,{
+        expiresIn: '124d'
+    })
+}
 
 module.exports = {
     registerUser,
