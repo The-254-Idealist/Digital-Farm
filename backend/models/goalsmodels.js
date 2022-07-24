@@ -7,10 +7,27 @@ const goalSchema = mongoose.Schema(
             required: true,
             ref: 'User',
           },
-        text: {
+        title: {
             type : String,
-            required : [true, 'Please Add a text value']
+            required : [true, 'Please Add title of the product']
+        },
+        img:{
+            type: String,
+        },
+        desc:{
+            type: String,
+            required:[ true, 'Please Add description of the product']
+        },
+        price :{
+            type: Number,
+            required: [ true , 'Please add the price of the product']
+        },
+        category:{
+             
+            type:String,
+            required: [ true , 'Add the category of the product']
         }
+
     } , {
         timestamps: true,
     }

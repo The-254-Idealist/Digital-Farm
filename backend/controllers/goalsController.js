@@ -4,22 +4,50 @@ const Goal = require('../models/goalsmodels')
 
 const getGoals = asyncHandler (
    async (req, res ) => {
-         const goals = await Goal.find({user: req.user.id})    
+ 
+         const goals = await Goal.find()    
 
         res.status(200).json( goals)
     }
 )
+const getUserGoals = asyncHandler (
+    async (req, res ) => {
+    
+         const goals = await Goal.find({ user: req.user.id })
+         res.status(200).json( goals)
+
+         return;
+     }
+ )
+ 
+
+
 
 const postGoals  =  asyncHandler (
    async (req , res) =>{
-       if(!req.body.text){
+        const { title,
+            img,
+            desc,
+            price,
+            category, } = req.body
+       if(!req.body.title 
+        || !req.body.img 
+        || !req.body.desc 
+        || !req.body.category
+        || !req.body.price
+        
+        ){
            res.status(400)
-           throw new Error ('Please add a text field')
+           throw new Error ('Please add all fields')
        }
        
        const goal = await Goal.create({
-           text: req.body.text,
-           user: req.user.id,
+            title,
+            img,
+            desc,
+            price,
+            category,
+            user: req.user.id,
        })
 
        res.status(200).json(goal)
@@ -84,6 +112,7 @@ const putGoals =asyncHandler (
 
 module.exports= {
     getGoals,
+    getUserGoals,
     postGoals,
     deleteGoals,
     putGoals,

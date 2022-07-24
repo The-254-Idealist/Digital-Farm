@@ -1,5 +1,11 @@
 import { useState , useEffect } from 'react'
 import { BsPersonCircle} from 'react-icons/bs'
+import { useSelector , useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import {  toast } from 'react-toastify'
+import {login , reset} from '../features/auth/authSlice'
+import Spinner from '../components/Spinner'
+import './Auth.css'
 
 
 function Login() {
@@ -12,16 +18,44 @@ const [formData, setformData] = useState(
 )
 const {email, password} = formData
 
-const onChange = (e) =>{
-  setformData((prevState)=>({
-    ...prevState,
-    [e.target.name] : e.target.value,
+const navigate = useNavigate()
+const dispatch = useDispatch()
 
-  }))
-}
+const {user, isLoading, isError, isSuccess, message }   = useSelector(
+  (state) => state.auth)
+
+  useEffect(()=>{
+    if(isError){
+      toast.error(message)
+    }
+    if(isSuccess || user ){
+       navigate('/dashboard')
+    }
+    dispatch(reset())
+  
+  },[user, isError, isSuccess, message, navigate, dispatch])
+  
+  const onChange = (e) =>{
+    setformData((prevState)=>({
+      ...prevState,
+      [e.target.name] : e.target.value,
+  
+    }))
+  }
+
 const onSubmit = (e) =>{
   e.preventDefault()
+  
+  const userData = {
+    email,
+    password
+  }
+  dispatch(login(userData))
 }
+    if(isLoading) {
+      return <Spinner />
+    }
+
 
   return (
     <>

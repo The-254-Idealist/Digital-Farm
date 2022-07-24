@@ -1,0 +1,43 @@
+.form {
+    width: 50%;
+    margin: 0 auto;
+  }
+  .content{
+    
+     display: flexbox;
+    flex-flow: column;
+    flex-wrap: wrap; 
+  
+  }
+  
+  .form-group {
+    /* margin-bottom: 10px; */
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: inherit;
+  }
+  
+  .form-group label {
+    text-align: left;
+    display: block;
+    margin: 0 0 5px 3px;
+  }
+  .heading {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 50px;
+    padding: 0 20px;
+  }

@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -89,12 +89,18 @@ h3 {
 
 .goals {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 2fr);
+  /* display: flex;
+  flex-wrap: wrap;
+  flex-direction: column; */
   gap: 10px;
 }
 
 .goal {
   background-color: #f4f4f4;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   margin: 10px 0;
   padding: 20px 0 10px;
   position: relative;
@@ -109,10 +115,16 @@ h3 {
   background: none;
 }
 
-.form,
-.content {
+.form {
   width: 50%;
   margin: 0 auto;
+}
+.content{
+  
+   display: flexbox;
+  flex-flow: column;
+  flex-wrap: wrap; 
+
 }
 
 .form-group {
