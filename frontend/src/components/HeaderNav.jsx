@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { Button , Navbar, Container,  FormControl , Nav, InputGroup, Card  } from 'react-bootstrap'
-import { AiOutlineSearch} from 'react-icons/ai'
 import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
 import { FaBold } from 'react-icons/fa'
@@ -16,7 +15,18 @@ const HeaderNav = () => {
     const dispatch = useDispatch()
     const { buyer } = useSelector((state) => state.authbuyer)
    
-  
+    const [SearchTerm, setSearchTerm] = useState()
+  const onChangeHandler = (event) =>{
+    setSearchTerm(event.target.value)
+
+    
+    navigate('/search', {
+      state:{
+        fun: SearchTerm
+      },
+    }
+    )
+  }
     const onLogout = () => {
       dispatch(logout())
       dispatch(reset())
@@ -44,7 +54,7 @@ const HeaderNav = () => {
                     {buyer ? (
                         <>
                           <Button size='lg' className='btn' variant='success' >
-                             <VscAccount /> <h3>{buyer.name}</h3>
+                             <VscAccount /> <h3>{buyer && buyer.name}</h3>
                           </Button>
                           <Button size='lg' className='btn' variant='success' onClick={onLogout}>
                             <FaSignOutAlt /> Logout
@@ -80,20 +90,16 @@ const HeaderNav = () => {
                     </Badge>  
             </Container>
         </Navbar>
-    
-        <Card className='from' style={{ width: '45%' }}>
-            <InputGroup className="sm-2" >
-                
-                <FormControl
-                placeholder="What are you looking for?"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-                className="me-2" 
-                    
-                />
-                <Button size='lg' className='btn' variant='success'> <AiOutlineSearch/></Button> 
-            </InputGroup>
-        </Card>
+
+        <div className="templateContainer">
+             <div className="searchInput_Container">
+             <input id="searchInput" type="text" placeholder="Search here..." onChange={(event) => {
+            onChangeHandler(event);
+            }}
+            />
+           </div>
+           </div>
+      
        </div>
   )
 }

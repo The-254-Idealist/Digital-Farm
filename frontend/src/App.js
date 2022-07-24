@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState} from 'react';
 import './App.css';
-import { BrowserRouter as Router , Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router , Routes, Route, useNavigate} from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import Cart from './pages/Cart';
@@ -11,9 +11,15 @@ import RegisterBuyer from './pages/buyer/Registerbuyer';
 import Footer from './components/Footer';
 import ProductList from './pages/ProductList';
 import HeaderNav from './components/HeaderNav';
+import About from './pages/About';
+import SearchBar from './pages/SearchBar';
+import ErrorPage from './pages/ErrorPage';
+
 
 
 function App() {
+   
+
   return (
     <>
      <Router> 
@@ -25,11 +31,14 @@ function App() {
              <Route path="/products/:category" element={<ProductList/>} />
              <Route path="/product/:id" element={<Product />}/>
              <Route path='/cart' element={ <Cart /> }  />
+             <Route path='/about' element={<About/> } />
+             <Route path='/search' element={ <SearchBar /> } />
+             <Route path="*" element={ <ErrorPage />} />
            </Routes>
 
       </Router>
       <Footer/>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   );
 }

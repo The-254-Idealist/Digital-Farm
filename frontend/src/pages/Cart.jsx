@@ -12,6 +12,7 @@ import { buyerRequest } from "../requestMethods";
 import {AiOutlineDelete } from "react-icons/ai"
 import StripeCheckout from "react-stripe-checkout";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 
 
@@ -97,7 +98,7 @@ const CartContainer = () => {
           <div className="cart-items">
             {cart.cartItems &&
               cart.cartItems.map((cartItem) => (
-                <div className="cart-item" key={cartItem.id}>
+                <div className="cart-item" key={cartItem._id}>
                   <div className="cart-product">
                     <img src={cartItem.img} alt={cartItem.name} />
                     <div>
@@ -144,6 +145,8 @@ const CartContainer = () => {
             >
               <button > Pay with Stripe</button>
             </StripeCheckout>
+
+            <a href="https://tinypesa.com/express/digital-farmhouse"><Button variant="success" >  Lipa Na Mpesa </Button></a>
               <div className="continue-shopping">
                 <Link to="/">
                   <svg

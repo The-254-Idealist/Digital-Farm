@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { mobile } from "../responsive";
 import { useLocation } from "react-router";
 import { useState } from "react";
 import Products from "../components/Products"

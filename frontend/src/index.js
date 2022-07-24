@@ -5,7 +5,6 @@ import { store } from './app/store';
 import App from './App';
 // import "./index.css"
 import reportWebVitals from './reportWebVitals';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const container = document.getElementById('root');
@@ -13,9 +12,9 @@ const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
+   <Provider store={store}>
       <App />
-    </Provider>
+        </Provider>
   </React.StrictMode>
 );
 

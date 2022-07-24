@@ -1,5 +1,5 @@
 const Order = require("../models/orderModels");
-const  {  adminProtect,} = require("../middleware/authMiddleware")
+
 
 const router = require("express").Router();
 
@@ -17,7 +17,7 @@ router.post("/",  async (req, res) => {
 });
 
 //UPDATE
-router.put("/:id", adminProtect, async (req, res) => {
+router.put("/:id",  async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
@@ -33,7 +33,7 @@ router.put("/:id", adminProtect, async (req, res) => {
 });
 
 //DELETE
-router.delete("/:id", adminProtect, async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
     res.status(200).json("Order has been deleted...");
@@ -43,7 +43,7 @@ router.delete("/:id", adminProtect, async (req, res) => {
 });
 
 //GET USER ORDERS
-router.get("/find/:buyerId", adminProtect ,async (req, res) => {
+router.get("/find/:buyerId", async (req, res) => {
   try {
     const orders = await Order.find({ buyerId: req.params.buyerId });
     res.status(200).json(orders);
@@ -54,7 +54,7 @@ router.get("/find/:buyerId", adminProtect ,async (req, res) => {
 
 // //GET ALL
 
-router.get("/", adminProtect, async (req, res) => {
+router.get("/",  async (req, res) => {
   try {
     const orders = await Order.find();
     res.status(200).json(orders);
@@ -65,7 +65,7 @@ router.get("/", adminProtect, async (req, res) => {
 
 // GET MONTHLY INCOME
 
-router.get("/income", adminProtect, async (req, res) => {
+router.get("/income",  async (req, res) => {
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
