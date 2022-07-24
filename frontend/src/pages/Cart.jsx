@@ -10,13 +10,10 @@ import {
 import '../App.css'
 import { buyerRequest } from "../requestMethods";
 import {AiOutlineDelete } from "react-icons/ai"
-import StripeCheckout from "react-stripe-checkout";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 
-
-const KEY = process.env.REACT_APP_STRIPE;
 
 
 const CartContainer = () => {
@@ -39,7 +36,6 @@ const CartContainer = () => {
           });
           navigate("/success", { 
                     state:{
-                      stripeData: res.data,
                       products: cart,
                      } 
                   }) 
@@ -133,19 +129,6 @@ const CartContainer = () => {
                 <span className="amount">Kes{cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <StripeCheckout
-              name="Agri Tech"
-              image="https://bit.ly/3cj9V2v"
-              billingAddress
-              shippingAddress
-              description={`Your total is Ksh${cart.cartTotalAmount}`}
-              amount={cart.cartTotalAmount}
-              token={onToken}
-              stripeKey={KEY}
-            >
-              <button > Pay with Stripe</button>
-            </StripeCheckout>
-
             <a href="https://tinypesa.com/express/digital-farmhouse"><Button variant="success" >  Lipa Na Mpesa </Button></a>
               <div className="continue-shopping">
                 <Link to="/">
